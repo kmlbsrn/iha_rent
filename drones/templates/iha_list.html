@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+IHA List
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">İHA Listings</h1>
+        <!-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            New Add
+        </button> -->
+
+        <a href="create-iha" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Add</a>
+    </div>
+
+    <table id="rentalTable" class="w-full">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Weight</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rental listings will be dynamically added here -->
+            {% for drone in drones %}
+            <tr>
+                <td>{{ drone.brand }}</td>
+                <td>{{ drone.model }}</td>
+                <td>{{ drone.weight }}</td>
+                <td>{{ drone.category }}</td>
+                <td>
+                    <a href="update-iha/{{ drone.id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                    <a href="delete-iha/{{ drone.id }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        // Initialize DataTables
+        $('#rentalTable').DataTable();
+    });
+</script>
+{% endblock %}

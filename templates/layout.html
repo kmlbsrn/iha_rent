@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document{% endblock %}</title>
+
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Include DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!--Navbar  -->
+    <nav class="bg-gray-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between">
+            <a href="/api/" class="text-white text-2xl font-bold">Drone Rental</a>
+            <a href="/api/rentals" class="text-white">Rentals</a>
+            <a href="/api/ihalar" class="text-white">IHA</a>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Include DataTables JavaScript -->
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

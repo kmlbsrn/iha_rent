@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %}
+Rental Form
+{% endblock %}
+{% block content %}
+
+
+<!-- rental form use tailwind-->
+
+
+<form method="post"
+    action="{% if rental %}{% url 'update_rental' pk=rental.pk %}{% else %}{% url 'create_rental' %}{% endif %}"
+    class="space-y-4">
+    {% csrf_token %}
+    <!-- Drone Field -->
+    <div>
+       <label for="drone" class="block text-gray-700 font-medium">Drone:</label>
+          <select name="drone" id="drone" required class="w-full px-3 py-2 border border-gray-300 rounded-md
+                         focus:outline-none focus:border-indigo-500
+                         placeholder-gray-400">
+                {% for drone in drones %}
+                <option value="{{ drone.id }}"{% if rental and rental.drone.id == drone.id %}selected{% endif %}>{{ drone.brand }} {{ drone.model }}</option>
+                {% endfor %}
+          </select>
+    </div>
+
+    <!-- User Field -->
+    <div>
+        <label for="user" class="block text-gray-700 font-medium">User:</label>
+        <select name="user" id="user" required class="w-full px-3 py-2 border border-gray-300 rounded-md
+                         focus:outline-none focus:border-indigo-500
+                         placeholder-gray-400">
+                {% for user in users %}
+                <option value="{{ user.id }}"{% if rental and rental.user.id == user.id %}selected{% endif %}>{{ user.username }}</option>
+                {% endfor %}
+          </select>
+    </div>
+    <!-- Rental Date Field -->
+
+    <div>
+        <label for="rental_date" class="block text-gray-700 font-medium">Rental Date:</label>
+        <input type="date" id="rental_date" name="rental_date" required class="w-full px-3 py-2 border border-gray-300 rounded-md
+                      focus:outline-none focus:border-indigo-500
+                      placeholder-gray-400" value="{% if rental %}{{ rental.rental_date }}{% endif %}">
+    </div>
+
+
+    <!-- Return Date Field -->
+    <div>
+        <label for="return_date" class="block text-gray-700 font-medium">Return Date:</label>
+        <input type="date" id="return_date" name="return_date" required class="w-full px-3 py-2 border border-gray-300 rounded-md
+                      focus:outline-none focus:border-indigo-500
+                      placeholder-gray-400" value="{% if rental %}{{ rental.return_date }}{% endif %}">
+    </div>
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-indigo-500 text-white px-4 py-2 rounded-md
+                                   hover:bg-indigo-600 transition duration-300">
+        Submit
+    </button>
+</form>
+
+{% endblock %}
